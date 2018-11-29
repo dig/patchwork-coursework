@@ -118,15 +118,19 @@ def drawPatchwork(size, colourList):
             # Colour depending on position of patch.
             patchColour = colourList[0]
             
+            # Below Diagonal
+            if (x + 100) > ((size * 100) - y):
+                patchColour = colourList[2]
+                
+            # Diagonal
+            if (x + 100) == ((size * 100) - y):
+                patchColour = colourList[1]
+            
             # Vertical and Horizontal.
             sideValue = (size - 1) * 100
             if x == sideValue:
                 patchColour = colourList[1]
             elif y == sideValue:
-                patchColour = colourList[1]
-                
-            # Diagonal
-            if (x + 100) == ((size * 100) - y):
                 patchColour = colourList[1]
                 
             
