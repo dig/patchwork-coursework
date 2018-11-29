@@ -95,7 +95,7 @@ def drawPatch1(win, x, y, colour):
             
             # Invert colours if row is odd.
             invert = col > 1
-            if (row % 2 == 1):
+            if row % 2 == 1:
                 invert = col < 2
                 
             # Draw H function.
@@ -118,24 +118,21 @@ def drawPatchwork(size, colourList):
             # Colour depending on position of patch.
             patchColour = colourList[0]
             
-            # Below Diagonal
-            if (x + 100) > ((size * 100) - y):
-                patchColour = colourList[2]
-                
-            # Diagonal
-            if (x + 100) == ((size * 100) - y):
+            # Diagonal and below.
+            yDiff = ((size * 100) - y)
+            if (x + 100) == yDiff:
                 patchColour = colourList[1]
+            elif (x + 100) > yDiff:
+                patchColour = colourList[2]
             
             # Vertical and Horizontal.
             sideValue = (size - 1) * 100
-            if x == sideValue:
-                patchColour = colourList[1]
-            elif y == sideValue:
+            if (x == sideValue) or (y == sideValue):
                 patchColour = colourList[1]
                 
             
-            # If odd column then draw patch 1 else patch 3.
-            if col % 2 == 1:
+            # If even and below diagonal then draw patch 1 else patch 3.
+            if (col % 2 == 0) and ((x + 100) >= yDiff):
                 drawPatch1(win, x, y, patchColour)
             else:
                 drawPatch3(win, x, y, patchColour)
