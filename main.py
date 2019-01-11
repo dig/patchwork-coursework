@@ -133,9 +133,9 @@ def drawPatchwork(size, colourList):
             
             # If even and below diagonal then draw patch 1 else patch 3.
             if (col % 2 == 0) and ((x + 100) >= yDiff):
-                drawPatch1(win, x, y, patchColour)
-            else:
                 drawPatch3(win, x, y, patchColour)
+            else:
+                drawPatch1(win, x, y, patchColour)
     
 def main():    
     # Patchwork size user input.
