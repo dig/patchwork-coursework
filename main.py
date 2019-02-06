@@ -47,6 +47,8 @@ def drawPatchwork(size, colourList):
             patch.draw()
             PATCH_LIST.append(patch)
             
+    return win
+            
 def undrawPatchwork():
     for patch in PATCH_LIST:
         patch.undraw()
@@ -74,16 +76,17 @@ def getInput():
     return colourList, size
     
 def main():    
-
     # Asking user for input.
     colourList, size = getInput()
      
     # Setup graphic window and draw patchwork.
-    drawPatchwork(int(size), colourList)
+    window = drawPatchwork(int(size), colourList)
     
     print ("Press ENTER to undraw patchwork.")
     input()
     
     undrawPatchwork()
+    print ("Patchwork removed.")
+    window.close()
     
 main()

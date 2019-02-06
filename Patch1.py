@@ -1,4 +1,5 @@
 from graphics import *
+from LetterH import *
 
 class Patch1:
     def __init__(self, window, x, y, colour):
@@ -8,53 +9,6 @@ class Patch1:
         self.colour = colour
         self.objects = []
         self.border = []
-        
-    def drawLetter(self, x, y, width, height, flip, invert):
-        # Space per row.
-        widthSpace = width / 5
-        heightSpace = height / 5
-        
-        # Invert color if specified.
-        fillColour = self.colour
-        spaceColour = "white"
-        if invert:
-            fillColour = "white"
-            spaceColour = self.colour
-        
-        # Draw background.
-        background = Rectangle(Point(x, y), Point(x + width, y + height))
-        background.setFill(fillColour)
-        background.setOutline(fillColour)
-        background.draw(self.window)
-        self.objects.append(background)
-        
-        # Calculate position of top element depending on x,y,w,h and flip status.
-        topPos1 = Point(x + widthSpace, y)
-        topPos2 = Point(x + (width - widthSpace), y + ((height / 2) - (heightSpace / 2)))
-        if flip:
-            topPos1 = Point(x, y + heightSpace)
-            topPos2 = Point(x + ((width / 2) - (widthSpace / 2)), y + (height - heightSpace))
-        
-        # Draw top element.
-        topElement = Rectangle(topPos1, topPos2)
-        topElement.setFill(spaceColour)
-        topElement.setOutline(spaceColour)
-        topElement.draw(self.window)
-        self.objects.append(topElement)
-        
-        # Calculate position of top element depending on x,y,w,h and flip status.
-        bottomPos1 = Point(x + widthSpace, y + ((height / 2) + (heightSpace / 2)))
-        bottomPos2 = Point(x + (width - widthSpace), y + height)
-        if flip:
-            bottomPos1 = Point(x + ((width / 2) + (widthSpace / 2)), y + heightSpace)
-            bottomPos2 = Point(x + width, y + (height - heightSpace))
-        
-        # Draw bottom element.
-        bottomElement = Rectangle(bottomPos1, bottomPos2)
-        bottomElement.setFill(spaceColour)
-        bottomElement.setOutline(spaceColour)
-        bottomElement.draw(self.window)
-        self.objects.append(bottomElement)
         
     def drawBorder(self):
         if len(self.border) == 0:
@@ -94,7 +48,9 @@ class Patch1:
                         invert = col < 2
                         
                     # Draw H function.
-                    self.drawLetter(hX, hY, 25, 25, col % 2, invert)
+                    letter = LetterH(hX, hY, 25, 25, col % 2, invert, self.colour)
+                    letter.draw(self.window)
+                    self.objects.append(letter)
         else:
             for obj in self.objects:
                 obj.draw(self.window)
